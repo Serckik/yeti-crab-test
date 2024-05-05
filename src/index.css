@@ -1,0 +1,29 @@
+#table button {
+  margin-right: 2%;
+  margin-bottom: 20px;
+}
+
+.g-text-input__content {
+  margin-bottom: 40px;
+  width: 20% !important;
+}
+
+table {
+  width: 100%;
+}
+
+div[role="dialog"] {
+  padding: 30px;
+}
+
+div[role="dialog"] .g-text-input__content,
+div[role="dialog"] .g-text-area__content {
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 100% !important;
+}
+
+div[role="dialog"] button {
+  margin-top: 10px;
+  display: block;
+}
