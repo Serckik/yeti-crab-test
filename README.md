@@ -1,30 +1,32 @@
-# React + TypeScript + Vite
+## Запуск проекта
+1. npm i
+2. npm run dev
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Функционал проекта
+1. Выводится таблица заявок и то сколько заявок находится на данный момент в таблице.
+#Обычный пользователь может:
+  2.1 Сортировать заявки и искать заявку в поиске. Поиск выводит любое совпадение с любым столбцом.
+  2.2 Менять порядок столбцов. В правом углу шапки таблицы есть иконка решётки и при нажатии всплывает список с названиями столбцов. Столбец можно скрыть, либо ппереместить с помощью react-beautiful-dnd
+  2.3 Скрыть выполненные задачи.
+#Администратор может:
+  3.1 Выполнять те же самые фунции, что и не администратор.
+  3.2 Выбрать определённые заявки для удаления, для этого надо нажать слева от шапки таблицы и выбрать все заявки, либо выбрать определённые. Когда выбрана одна из заявок, появляется кнопка для удаления выбранных заявок.
+  3.3 Редактировать заявки для этого нужно нажать на три точки справа от строки таблицы и выбрать редактировать.
+  3.4 Редактировать можно название фирмы, фио, номер телефона, комментарии и выбрать статус заявки.
+  3.5 Поля фирмы и фио не должны быть пустыми. Поле телефона должно соответствовать формату +7 и 10 цифр. Если какое-то поле будет не верно заполнено покажется предупреждение у нужного поля.
+  3.6 Добавлять новые задачи.
+4. Для дизайна использовался Gravity UI
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Документация к к REST API
+Все методы обращения к backend буду описаны ввиде методов, пути и полей
+# Блок table - Endpoints for managing Table data
+1. GET /table/get_requests_table без полей, возвращает таблицу заявок.
+2. POST /table/add_requests - без полей, возвращает id созданной заявки.
+3. DELETE /table/delete_requests - id: number, primary, возвращает ответ об успешном удалении заявки или ошибке, если такого id не существует
+4. PATCH /table/change_requests - id:number, primary, FormData: {date: string, firm: string, number: string, comment:string, status: enum status, ATICode: number}, primary
+для POST, DELETE и PATCH запросов в дальнейшем при регистрации важно в поле header для jwt токена для него потребуется блок auth, который выглядит так
+# Блок auth - All about auth is here. Bearer transport
+1. POST /auth/jwt/login
+2. POST /auth/jwt/logout - token
+3. POST /auth/forgot-password - email
+4. POST /auth/reset-password - уникальный id для восстановления пароля, который пришёл в адресе ссылки с почты.
